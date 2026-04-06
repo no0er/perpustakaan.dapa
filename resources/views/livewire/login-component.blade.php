@@ -69,7 +69,7 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <img src="{{asset('assets/login.png')}}" alt="Library Logo">
+            <img src="{{asset('assets/login.png.png')}}" alt="Library Logo">
             <h2>Perpustakaan Login</h2>
         </div>
         <form>
@@ -77,7 +77,7 @@
                 <input type="text" wire:model="email" class="form-control" id="email" placeholder="Email Address">
                 @error('email')
                     <div class="alert alert-danger" role="alert">
-                        {{$message}}
+                        {{ $message }}
                     </div>
                 @enderror
             </div>
