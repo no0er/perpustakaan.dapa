@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management Dashboard</title>
+    <title>{{  $title ?? 'Page Title' }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin-dashboard.css') }}">
     <style>
         .sidebar {
             position: fixed;
@@ -57,7 +57,30 @@
     </style>
 </head>
 <body>
-  {{ $slot }}  
+  <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            @include('layouts.sidebar')
+
+            <!-- Main Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
+                @include('layouts.navigasi')
+                
+                {{ $slot }}
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace();
+
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script> 
 </body>
 </html>
-
