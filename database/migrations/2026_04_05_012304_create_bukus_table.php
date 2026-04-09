@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('bukus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(Kategori::class);
+            $table->foreignId('kategori_id')->constrained('kategoris');
             $table->text('judul')->nullable();
             $table->string('penulis')->nullable();
             $table->string('penerbit')->nullable();
             $table->string('isbn')->nullable();
-            $table->string('tahum')->nullable();
+            $table->string('tahun')->nullable();
             $table->string('jumlah')->nullable();
             $table->timestamps();
             $table->softDeletes(); 
