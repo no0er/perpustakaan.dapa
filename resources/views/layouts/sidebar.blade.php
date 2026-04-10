@@ -17,31 +17,31 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('buku') }}">
+                <a class="nav-link text-white" href="{{ route('buku')}}">
                     <span data-feather="book"></span>
                     Manage Books
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#loans">
+                <a class="nav-link text-white" href="{{route('pinjam')}}">
                     <span data-feather="file"></span>
                     Manage Loans
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#returns">
+                <a class="nav-link text-white" href="{{ route('kembali') }}">
                     <span data-feather="check-circle"></span>
                     Manage Returns
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('kategori') }}">
+                <a class="nav-link text-white" href="{{ route('kategori')}}">
                     <span data-feather="tag"></span>
                     Manage Categories
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('user') }}">
+                <a class="nav-link text-white" href="{{ route('user')}}">
                     <span data-feather="user"></span>
                     Manage Staff
                 </a>    

@@ -12,7 +12,7 @@ class BukuComponent extends Component
 {
     use WithPagination, WithoutUrlPagination;
     protected $paginationTheme = 'bootstrap';
-    public $kategori, $judul, $penulis, $penerbit, $isbn, $tahun, $jumlah, $cari;
+    public $kategori, $judul, $penulis, $penerbit, $isbn, $tahun, $jumlah, $cari, $id;
     public function render()
     {
         if ($this->cari != '') {
@@ -21,7 +21,6 @@ class BukuComponent extends Component
         } else {
             $data['buku'] = Buku::paginate(10);
         }
-        $data['buku'] = Buku::paginate(10);
         $data['category'] = Kategori::all();
         $layout['title'] = 'Kelola Buku';
         return view('livewire.buku-component', $data)->layoutData($layout);
@@ -36,27 +35,68 @@ class BukuComponent extends Component
             'tahun' => 'required',
             'isbn' => 'required',
             'jumlah' => 'required'
-        ],[
-            'judul.required'=>'Judul Buku Tidak Boleh Kosong!',
-            'kategori.required'=>'Kategori Buku Tidak Boleh Kosong!',
-            'penulis.required'=>'Penulis Buku Tidak Boleh Kosong!',
-            'penerbit.required'=>'Penerbit Buku Tidak Boleh Kosong!',
-            'tahun.required'=>'Tahun Buku Tidak Boleh Kosong!',
-            'isbn.required'=>'ISBN Buku Tidak Boleh Kosong!',
-            'jumlah.required'=>'Jumlah Buku Tidak Boleh Kosong!'
+        ], [
+            'judul.required' => 'Judul Buku Tidak Boleh Kosong!',
+            'kategori.required' => 'Kategori Buku Tidak Boleh Kosong!',
+            'penulis.required' => 'Penulis Buku Tidak Boleh Kosong!',
+            'penerbit.required' => 'Penerbit Buku Tidak Boleh Kosong!',
+            'tahun.required' => 'Tahun Buku Tidak Boleh Kosong!',
+            'isbn.required' => 'ISBN Buku Tidak Boleh Kosong!',
+            'jumlah.required' => 'Jumlah Buku Tidak Boleh Kosong!'
         ]);
 
         Buku::create([
-            'judul'=>$this->judul,
-            'kategori_id'=>$this->kategori,
-            'penulis'=>$this->penulis,
-            'penerbit'=>$this->penerbit,
-            'tahun'=>$this->tahun,
-            'isbn'=>$this->isbn,
-            'jumlah'=>$this->jumlah,
+            'judul' => $this->judul,
+            'kategori_id' => $this->kategori,
+            'penulis' => $this->penulis,
+            'penerbit' => $this->penerbit,
+            'tahun' => $this->tahun,
+            'isbn' => $this->isbn,
+            'jumlah' => $this->jumlah,
         ]);
         $this->reset();
-        session()->flash('success', 'Berhasil Tambah');
-        return redirect()->route('buku'); 
+        session()->flash('success', 'Berhasil Tambah!');
+        return redirect()->route('buku');
+    }
+
+    public function edit($id)
+    {
+        $buku = Buku::find($id);
+        $this->id = $buku->id;
+        $this->judul = $buku->judul;
+        $this->kategori = $buku->kategori->id;
+        $this->penulis = $buku->penulis;
+        $this->penerbit = $buku->penerbit;
+        $this->tahun = $buku->tahun;
+        $this->isbn = $buku->isbn;
+        $this->jumlah = $buku->jumlah;
+
+    }
+    public function update()
+    {
+        $buku = Buku::find($this->id);
+        $buku->update([
+            'judul' => $this->judul,
+            'kategori_id' => $this->kategori,
+            'penulis' => $this->penulis,
+            'penerbit' => $this->penerbit,
+            'tahun' => $this->tahun,
+            'isbn' => $this->isbn,
+            'jumlah' => $this->jumlah,
+        ]);
+        $this->reset();
+        session()->flash('success', 'Berhasil Ubah!');
+        return redirect()->route('buku');
+    }
+    public function confirm($id)
+    {
+        $this->id =  $id;
+    }
+    public function destroy(){
+        $buku=Buku::find($this->id);
+        $buku->delete();
+        $this->reset();
+        session()->flash('success', 'Berhasil Hapus!');
+         return redirect()->route('buku');
     }
 }

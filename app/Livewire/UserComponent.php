@@ -44,7 +44,7 @@ class UserComponent extends Component
             'password' => $this->password,
             'jenis' => 'admin'
         ]);
-        session()->flash('succes', 'Berhasil Simpan');
+        session()->flash('success', 'Berhasil Simpan');
         $this->reset();
     }
     public function edit($id)
